@@ -5,5 +5,4 @@ input = int(input("Введите число: "))
 res = 1
 for n in range(1, input+1):
     res = res * n
-    
-print(res)
+    print(res, end=' ')
