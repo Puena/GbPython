@@ -19,7 +19,6 @@ def my_func(list):
             max = val
         elif val < min:
           min = val
-          
     return max - min
 
 print(math.floor(my_func([1.1, 1.2, 3.1, 5, 10.01]) * 10 ** 2) / 10 ** 2)

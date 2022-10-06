@@ -25,6 +25,7 @@ def neg_fib(n):
     return neg_fib(n+2) - neg_fib(n+1)
 
 negative_fib = [neg_fib(-e) for e in reversed(range(1, k+1))]
+print(negative_fib)
 
 result = negative_fib + positive_fib
 
