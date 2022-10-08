@@ -9,18 +9,20 @@ def separate_string(string):
     split_signs = ["-", "+"]
     splitted = list()
     temp_string = list()
-    for c in string:
+    list_string = list(string)
+    for i, c in enumerate(list_string):
         if c == "=":
             if len(temp_string) > 0:
                 splitted.append("".join(temp_string))
                 temp_string = list()
             return splitted
-        if c in split_signs:
+        if c in split_signs and list_string[i+1] == " ":
             if c == "-":
-                temp_string.insert(0, c)
-            
-            splitted.append("".join(temp_string))
-            temp_string = list()
+                splitted.append("".join(temp_string))
+                temp_string = list(c)
+            else:            
+                splitted.append("".join(temp_string))
+                temp_string = list()
         elif c != " ":
             temp_string.append(c)
     return splitted
@@ -36,7 +38,6 @@ def parse_poly(string_array):
                 
                 poly[int(k)] = int(m)
         else:
-            print(expr)
             matched = re.search(r"([\-\d]+)", expr)
             if matched: 
                 k = 0
@@ -90,7 +91,6 @@ while (line != ""):
 
 f.close()
 
-f = open("polynomial.txt", "a")
-f.write("Poly sum:"+ "\n")
+f = open("polynomial_sum.txt", "w")
 f.write(pring_poly(poly_sum) + "\n")
 f.close()
