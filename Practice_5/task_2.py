@@ -68,8 +68,10 @@ def game_2021():
     count = game
     
     get_user_name("Введите имя первого игрока ", users)
-    init_ai(users)
-    # get_user_name("Введите имя второго игрока ", users)
+    if input("Вы хотите сыграть с БОТОМ? Y/n ").capitalize() == "Y":
+        init_ai(users)
+    else:
+        get_user_name("Введите имя второго игрока ", users)
     
     print("Game started!")
     
