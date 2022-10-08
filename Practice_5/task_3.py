@@ -79,13 +79,14 @@ def print_field(field: dict):
             print(f"---{c}---", end="")
         print()
         
-def user_input(field: list, name: str, users: dict):
+def handle_user_input(field: list, sign: int, name: str, users: dict):
     max_number = len(field) * len(field[0])
     while (True):
         try:
             cell_number = int(input(f"{name} укажите номер ячейки: "))
             cell_number = cell_number - 1
-            if (0 <= cell_number < max_number) and cell_is_empty(cell_number, field):
+            if 0 <= cell_number < max_number:
+                change_cell(cell_number, sign, field)
                 users[name].append(cell_number)
                 return cell_number
             else:
@@ -94,17 +95,13 @@ def user_input(field: list, name: str, users: dict):
             print("Не допустимое знаЧение, повторите ввод!")
             continue
 
-def cell_is_empty(cell_number: int, field: list):
-    row = cell_number // 3
-    col = cell_number % 3
-    
-    return field[row][col] == 0
-        
-        
+       
 def change_cell(cell_number: int, sign: int, field: list):
     row = cell_number // 3
     col = cell_number % 3
     
+    if (field[row][col] != 0):
+        raise ValueError("Не пустое поле!")
   
     field[row][col] = sign
 
@@ -120,8 +117,7 @@ def tik_tak_game():
     while (game == 0):
         sign = 1
         for name, _ in users.items():
-            val = user_input(field, name, users)
-            change_cell(val, sign, field)
+            handle_user_input(field, sign, name, users)
             print_field(field)
             game = is_win(field)
             if game == 1:
@@ -129,6 +125,7 @@ def tik_tak_game():
                 return
             elif game == -1:
                 print("Ничья")
+                return
             sign *= -1
     
         
