@@ -6,6 +6,9 @@
 
 # b) Подумайте как наделить бота ""интеллектом""
 
+from random import randint
+
+
 BOT_NAME = "(-_0)"
 
 def calculate_max_pick(current_value, max_value):
@@ -57,6 +60,12 @@ def ai_input(count, user_input, max_step):
         step = key_number - user_input
     else:
         step = count % key_number
+        
+    if step == 0:
+        step = randint(1, key_number-1)
+        
+    if step > count:
+        step = count
     
     print(f"{BOT_NAME} забрал {step} конфет")
     return step
