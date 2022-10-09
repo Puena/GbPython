@@ -5,9 +5,13 @@ from curses.ascii import isdigit
 
 def unzip(compressed_string:str):
     new_string = ""
+    digit = ""
     for i in range(len(compressed_string)):
         if compressed_string[i].isdigit():
-            new_string += compressed_string[i+1] * int(compressed_string[i])
+            digit += compressed_string[i]
+        else:
+            new_string += compressed_string[i] * int(digit)
+            digit = ""
             
     return new_string
         
@@ -30,7 +34,7 @@ def rle2(string: str):
     
     return new_string
 
-in_string = "wwwwwwwwwasdasdasdasdasdasdoooooooqweqwadaaaaaaaa"
+in_string = "wwwwwwwwwwwwwwasdasdasdasdasdasdoooooooqweqwadaaaaaaaa"
 print(in_string)
 compressed = rle2(in_string)
 print(compressed)
