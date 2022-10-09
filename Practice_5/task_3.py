@@ -5,6 +5,7 @@ import os
 
 
 def create_field():
+    # ONLY SQUERES !!!!
     return [
         [0, 0, 0],
         [0, 0, 0],
