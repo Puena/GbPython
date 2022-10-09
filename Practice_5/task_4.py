@@ -1,34 +1,40 @@
 # Реализуйте RLE алгоритм: реализуйте модуль сжатия и восстановления данных.
 
 from collections import Counter
+from curses.ascii import isdigit
 
-
-def add_or_increment(data: dict, key: str):
-    if key in data:
-        data[key] += 1
-    else:
-        data[key] = 1
-
-def dict_to_string(data: dict):
-    string = ""
-    for letter, count in data.items():
-        string += str(count)
-        string += letter
-    return string
-
-def rle(string: str):
-    # SORT !!!
-    hash_table = Counter(list(string))
-    print(hash_table)
+def unzip(compressed_string:str):
+    new_string = ""
+    for i in range(len(compressed_string)):
+        if compressed_string[i].isdigit():
+            new_string += compressed_string[i+1] * int(compressed_string[i])
+            
+    return new_string
+        
     
 def rle2(string: str):
-    temp = dict()
-    for s in string:
-        add_or_increment(temp, s)
+    new_string = ""
+    last_symmbol = string[0]
+    count = 1
     
-    return dict_to_string(temp)
-        
+    for i in range(1, len(string)):
+        if string[i] == last_symmbol:
+            count += 1
+            continue
+        else:
+            new_string += f"{count}{last_symmbol}"
+            last_symmbol = string[i]
+            count = 1
+            
+    new_string += f"{count}{last_symmbol}"
+    
+    return new_string
 
+in_string = "wwwwwwwwwasdasdasdasdasdasdoooooooqweqwadaaaaaaaa"
+print(in_string)
+compressed = rle2(in_string)
+print(compressed)
+unpack = unzip(compressed)
+print(unpack)
+print(unpack == in_string)
 
-
-print(rle2("wwwwwwwwwasdaklsjdkljhqiuhkajsdasduqwdasdasda"))
