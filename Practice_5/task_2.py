@@ -18,7 +18,7 @@ def calculate_max_pick(current_value, max_value):
         return max_value
 
 
-def get_user_name(message:str, users: dict):
+def set_user_name(message:str, users: dict):
     while (True):
         name = input(message)
         if name in users or name == BOT_NAME:
@@ -72,15 +72,15 @@ def ai_input(count, user_input, max_step):
 
 def game_2021():
     users = dict()
-    game = 2021
-    max_step_pick = 280
+    game = 234
+    max_step_pick = 28
     count = game
     
-    get_user_name("Введите имя первого игрока ", users)
-    if input("Вы хотите сыграть с БОТОМ? Y/n ").capitalize() == "Y":
+    set_user_name("Введите имя первого игрока ", users)
+    if input("Вы хотите сыграть с БОТОМ? Y/n ").upper() == "Y":
         init_ai(users)
     else:
-        get_user_name("Введите имя второго игрока ", users)
+        set_user_name("Введите имя второго игрока ", users)
     
     print("Game started!")
     

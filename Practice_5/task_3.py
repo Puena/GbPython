@@ -1,6 +1,9 @@
 # Создайте программу для игры в ""Крестики-нолики"".
 
 
+import os
+
+
 def create_field():
     return [
         [0, 0, 0],
@@ -118,6 +121,8 @@ def tik_tak_game():
         sign = 1
         for name, _ in users.items():
             handle_user_input(field, sign, name, users)
+            clear = lambda: os.system('clear')
+            clear()
             print_field(field)
             game = is_win(field)
             if game == 1:
