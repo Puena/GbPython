@@ -58,7 +58,8 @@ def is_win(field: list):
 def get_mark(val: int):
     marks = {
         -1: "O",
-        1: "X"
+        1: "X",
+        0: " "
     }
     
     if val in marks:
@@ -133,8 +134,5 @@ def tik_tak_game():
                 print("Ничья")
                 return
             sign *= -1
-    
-        
-    
     
 tik_tak_game()
