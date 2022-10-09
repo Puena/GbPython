@@ -21,7 +21,7 @@ def get_user_name(message:str, users: dict):
             break
 
 def is_win(field: list):
-    sum_to_win = 3
+    sum_to_win = len(field)
     row_sum = 0
     column_sum = 0
     diagonal_left_sum = 0
