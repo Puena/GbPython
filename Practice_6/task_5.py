@@ -1,3 +1,4 @@
+# Реализовать функцию возвращающую n штук шуток, сформированных случыйным образом из слов взятых из трёх списков - по одному из каждого
 import random
 
 
@@ -8,5 +9,7 @@ random.shuffle(word_first)
 random.shuffle(word_second)
 random.shuffle(word_third)
 
+input = int(input("Введите число шуток от 1 до 5 "))
+
 zipped = zip(word_first, word_second, word_third)
-print(list(zipped))
+print(list(zipped)[:input])
