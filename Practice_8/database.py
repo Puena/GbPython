@@ -18,7 +18,7 @@ def connect():
 def init():
     conn = connect()
     studentsTable = """CREATE TABLE IF NOT EXISTS students(
-            id int primary key,
+            id INTEGER primary key autoincrement,
             name text not null,
             lastname text not null,
             birthdate date not null
@@ -29,12 +29,12 @@ def init():
             )"""
     conn.execute(classRoomsTable)
     classesTable = """CREATE TABLE IF NOT EXISTS classes(
-            id int primary key,
+            id INTEGER primary key autoincrement,
             title text not null
             )"""
     conn.execute(classesTable)
     placesTable = """CREATE TABLE IF NOT EXISTS places(
-            id primary key,
+            id INTEGER primary key autoincrement,
             row int not null,
             cell int not null,
             variant int not null,
@@ -50,7 +50,7 @@ def init():
             )"""
     conn.execute(classAndStudentsTable)
     studentsOnPlaceTable = """CREATE TABLE IF NOT EXISTS students_on_place(
-            id int primary key,
+            id INTEGER primary key autoincrement,
             student_id int not null,
             place_id int not null,
             took_at timestamp not null,

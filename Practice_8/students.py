@@ -18,14 +18,14 @@ def find(id: int):
 def findAll():
     conn = database.connect()
     cursor = conn.cursor()
-    query = """select * from students where id = ?"""
-    cursor.execute(query, (id))
+    query = """select * from students"""
+    cursor.execute(query)
     records = cursor.fetchall()
-    return map(lambda r:
-               {"id": r[0],
-                "name": r[1],
-                "lastname": r[2],
-                "birthdate": r[3]}, records)
+    return list(map(lambda r:
+                    {"id": r[0],
+                     "name": r[1],
+                     "lastname": r[2],
+                     "birthdate": r[3]}, records))
 
 
 def insert(name, lastname, birthdate):
