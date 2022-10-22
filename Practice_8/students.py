@@ -7,12 +7,13 @@ def find(id: int):
     query = """select * from students where id = ?"""
     cursor.execute(query, (id))
     records = cursor.fetchall()
-    return {
-        "id": records[0][0],
-        "name": records[0][1],
-        "lastname": records[0][2],
-        "birthdate": records[0][3]
-    }
+    conn.close()
+    return list(map(lambda r: {
+        "id": r[0],
+        "name": r[1],
+        "lastname": r[2],
+        "birthdate": r[3]
+    }, records))
 
 
 def findAll():
@@ -21,6 +22,7 @@ def findAll():
     query = """select * from students"""
     cursor.execute(query)
     records = cursor.fetchall()
+    conn.close()
     return list(map(lambda r:
                     {"id": r[0],
                      "name": r[1],
@@ -35,7 +37,7 @@ def insert(name, lastname, birthdate):
                             VALUES (?, ?, ?)"""
     cursor.execute(query, (name, lastname, birthdate))
     conn.commit()
-    cursor.close()
+    conn.close()
 
 
 def update(id: int, name: str, lastname: str, birthdate):
@@ -51,7 +53,7 @@ def update(id: int, name: str, lastname: str, birthdate):
 def delete(id: int):
     conn = database.connect()
     cursor = conn.cursor()
-    query = """DELETE students where id = ?"""
+    query = """delete from students where id = ?"""
     cursor.execute(query, (id))
     conn.commit()
     conn.close()

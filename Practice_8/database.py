@@ -8,7 +8,6 @@ DB_NAME = "school.db"
 def connect():
     try:
         con = sqlite3.connect(DB_NAME)
-        print(f'Connected to database {DB_NAME}')
         return con
     except Error:
         print(Error)
@@ -17,6 +16,7 @@ def connect():
 
 def init():
     conn = connect()
+    print(f'Connected to database {DB_NAME}')
     studentsTable = """CREATE TABLE IF NOT EXISTS students(
             id INTEGER primary key autoincrement,
             name text not null,
