@@ -19,8 +19,8 @@ def init():
     conn = connect()
     print(f"Connecte to {DB_NAME}")
 
-    peoplesTable = """CREATE TABLE IF NOT EXIST peoples(
-            id INTEGER primary key autoincreament,
+    peoplesTable = """CREATE TABLE IF NOT EXISTS peoples(
+            id INTEGER primary key autoincrement,
             name text not null,
             lastname text not null,
             thirdname text,
