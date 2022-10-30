@@ -1,7 +1,17 @@
 import re
 from telegram import ForceReply, Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
+import logging
 MY_TOKEN = "YOUR TOKEN"
+
+logging.basicConfig(
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
+)
+logger = logging.getLogger(__name__)
+
+
+def clearExpresiion(input_str: str):
+    return re.sub(r'[^\d+=*%^/\(\)\-]', "", input_str)
 
 
 def calc(expresiion: str):
@@ -9,25 +19,25 @@ def calc(expresiion: str):
     return eval(cleared_expresion)
 
 
-def clearExpresiion(input_str: str):
-    return re.sub(r'[^\d+=*%^/\(\)\-]', "", input_str)
-
-
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /start is issued."""
-    await update.message.reply_html(
-        "Добро пожаловать в калькулятор, введите выражение для расчета, например: 1 + 2",
-        reply_markup=ForceReply(selective=True),
+    logger.info("Start")
+    await update.message.reply_text(
+        "Добро пожаловать в калькулятор, введите выражение для расчета, например: 1 + 2"
     )
 
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    message = f"Результат выражения: {calc(update.message.text)}"
+    logger.info("User input {}".format(update.message.text))
+    result = calc(update.message.text)
+    logger.info("Result is: {}".format(update.message.text))
+    message = f"Результат выражения: {result}"
     await update.message.reply_text(message)
 
 
 def main() -> None:
     """Start the bot."""
+    logger.info("Bot started!")
     # Create the Application and pass it your bot's token.
     application = Application.builder().token(MY_TOKEN).build()
 
